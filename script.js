@@ -13,7 +13,8 @@ const sortInputArray = (event) => {
   // .getElementsByClassName() returns an array-like object. You can use the spread operator to convert it into an array. [...element]
   // map function to iterate over the array to get the values from your select elements. These values will currently be strings
   // Number() function to convert those strings into numbers
-  const sortedValues = bubbleSort(inputValues); // call the function to actually sort the array.
+  //const sortedValues = bubbleSort(inputValues); // call the Bubble Sort function to actually sort the array.
+  const sortedValues = selectionSort(inputValues); // call the Selection Sort function to actually sort the array.
   updateUI(sortedValues); // call the function to update the display
 };
 
@@ -27,8 +28,8 @@ const updateUI = (array = []) => {
   });
 };
 
-// Function to actually sort the array.
-// Starts at the beginning of the array and 'bubbles up' unsorted values towards the end, iterating through the array until it is completely sorted.
+// Bubble Sort function
+// which starts at the beginning of the array and 'bubbles up' unsorted values towards the end, iterating through the array until it is completely sorted.
 const bubbleSort = (array) => {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - 1; j++) {
@@ -44,7 +45,26 @@ const bubbleSort = (array) => {
       }
     }
   }
-  return array; // Finally, after your outer loop has finished executing, return the sorted array.
+  return array;
+};
+
+// Selection sort function
+// works by finding the smallest value in the array, then swapping it with the first value in the array. Then, it finds the next smallest value in the array, and swaps it with the second value in the array. It continues iterating through the array until it is completely sorted.
+const selectionSort = (array) => {
+  for (let i = 0; i < array.length; i++) {
+    let minIndex = i; // A selection sort relies on tracking the index of the smallest value in the array. This ensures that if your current value is the smallest, it will be swapped with itself and not be moved. You will need to be able to reassign the value of minIndex as you iterate through the array.
+    for (let j = i + 1; j < array.length; j++) {
+      // console.log(array, array[j], array[minIndex]); // For debugging purposes
+      if (array[j] < array[minIndex]) {
+        minIndex = j;
+      }
+    }
+    // you've found the smallest value. You need to swap it with your current value.
+    const temp = array[i];
+    array[i] = array[minIndex];
+    array[minIndex] = temp;
+  }
+  return array;
 };
 
 // event listeners
