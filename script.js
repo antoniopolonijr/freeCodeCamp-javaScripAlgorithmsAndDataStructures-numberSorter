@@ -13,8 +13,10 @@ const sortInputArray = (event) => {
   // .getElementsByClassName() returns an array-like object. You can use the spread operator to convert it into an array. [...element]
   // map function to iterate over the array to get the values from your select elements. These values will currently be strings
   // Number() function to convert those strings into numbers
-  //const sortedValues = bubbleSort(inputValues); // call the Bubble Sort function to actually sort the array.
-  const sortedValues = selectionSort(inputValues); // call the Selection Sort function to actually sort the array.
+  //
+  // const sortedValues = bubbleSort(inputValues); // call the Bubble Sort function to actually sort the array.
+  // const sortedValues = selectionSort(inputValues); // call the Selection Sort function to actually sort the array.
+  const sortedValues = insertionSort(inputValues); // call the Insertion Sort function to actually sort the array.
   updateUI(sortedValues); // call the function to update the display
 };
 
@@ -63,6 +65,25 @@ const selectionSort = (array) => {
     const temp = array[i];
     array[i] = array[minIndex];
     array[minIndex] = temp;
+  }
+  return array;
+};
+
+// Insertion Sort function
+// This algorithm works by building up a sorted array at the beginning of the list. It begins the sorted array with the first element. Then it inspects the next element and swaps it backward into the sorted array until it is in a sorted position, and so on.
+const insertionSort = (array) => {
+  // An insertion sort algorithm starts the sort at the beginning of the list, meaning the first element is already sorted
+  for (let i = 1; i < array.length; i++) {
+    const currValue = array[i];
+    let j = i - 1;
+    while (j >= 0 && array[j] > currValue) {
+      // First condition, it should not run beyond the beginning of the array (accessed with j).
+      // Second condition, the loop should not run after it finds a value smaller than the current value.
+      array[j + 1] = array[j]; // On each iteration of your while loop, it is finding an element that is larger than your current value. You need to move that element to the right to make room for your current value.
+      j--; // To prevent an infinite loop
+      // On each iteration of your while loop, it is finding an element that is larger than your current value. You need to move that element to the right to make room for your current value.
+    }
+    array[j + 1] = currValue; // to insert current value. Remember that the loop ends when j is either out of the array bounds, or when the value at j is less than current value.
   }
   return array;
 };
