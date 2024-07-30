@@ -16,7 +16,19 @@ const sortInputArray = (event) => {
   //
   // const sortedValues = bubbleSort(inputValues); // call the Bubble Sort function to actually sort the array.
   // const sortedValues = selectionSort(inputValues); // call the Selection Sort function to actually sort the array.
-  const sortedValues = insertionSort(inputValues); // call the Insertion Sort function to actually sort the array.
+  // const sortedValues = insertionSort(inputValues); // call the Insertion Sort function to actually sort the array.
+  const sortedValues = inputValues.sort((a, b) => {
+    return a - b;
+  }); // To sort the elements of an array, you can use the built-in method called .sort()
+  // The Sort button may appear to work correctly when clicked, but this is only because all the values in the array are single digits, and the sorting may not work as expected with more complex values.
+  // Notice how the number 10 is placed at the beginning of the array. This is because the default behavior of .sort() is to convert the numbers values to strings, and sort them alphabetically. And 10 comes before 2 alphabetically.
+  // o fix this, you can pass a callback function to the .sort() method. The callback function has two parameters - for yours, use a and b. The parameters of a and b represent the number values in the array that will be sorted.
+  /* The callback to .sort() should return a number. That number determines how to sort the elements a and b:
+      If the number is negative, sort a before b.
+      If the number is positive, sort b before a.
+      If the number is zero, do not change the order of a and b.
+     Keeping in mind that you want the numbers to be sorted in ascending order (smallest to largest), return a single subtraction calculation using a and b that will correctly sort the numbers with the above logic.
+  */
   updateUI(sortedValues); // call the function to update the display
 };
 
